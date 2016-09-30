@@ -4,17 +4,22 @@ services:
     # Ruby+Rails container
     web:
         build:
-            context: .
+            context: .dockerfiles
+            dockerfile: Dockerfile.web
+            args:
+                node_version: 6.7.0
         environment:
-            - BUNDLE_PATH=/opt/bundle
+            - BUNDLE_APP_CONFIG=/opt/bundle
             - BUNDLE_BIN=/opt/bundle/bin
+            - BUNDLE_SILENCE_ROOT_WARNING=1
+            - BUNDLE_PATH=/opt/bundle
+            - GEM_HOME=/opt/bundle
         volumes:
             - .:/usr/src/app
             - tmp:/usr/src/app/tmp
             - bundle:/opt/bundle
         ports:
             - "3000:3000"
-        # command: bin/startup-development
 
 volumes:
     bundle:

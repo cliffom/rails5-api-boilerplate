@@ -1,0 +1,12 @@
+FROM ruby:2.3
+MAINTAINER Michael Clifford <cliffom@gmail.com>
+
+# Install node and npm
+ARG node_version
+ENV NODE_VERSION $node_version
+RUN wget https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz
+RUN tar -C /usr/local --strip-components 1 -xzf node-v${NODE_VERSION}-linux-x64.tar.gz && rm node-v${NODE_VERSION}-linux-x64.tar.gz
+
+WORKDIR /usr/src/app
+VOLUME /usr/src/app
+EXPOSE 3000
