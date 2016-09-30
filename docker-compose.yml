@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+    # Ruby+Rails container
+    web:
+        build:
+            context: .
+        environment:
+            - BUNDLE_PATH=/opt/bundle
+            - BUNDLE_BIN=/opt/bundle/bin
+        volumes:
+            - .:/usr/src/app
+            - tmp:/usr/src/app/tmp
+            - bundle:/opt/bundle
+        ports:
+            - "3000:3000"
+        # command: bin/startup-development
+
+volumes:
+    bundle:
+    tmp:
